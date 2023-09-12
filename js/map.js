@@ -45,7 +45,7 @@ var frontLineStyles = {
   "stroke-width": 10,
 };
 
-fetch("front_line.geojson")
+fetch("data/front_line.geojson")
   .then(function (response) {
     return response.json();
   })
@@ -63,55 +63,15 @@ var positiosStyles = {
   "stroke-width": 1,
 };
 
-fetch("artilerry position.geojson")
+fetch("data/artilerry position.geojson")
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
-    // coords = []
-
-    // console.log(data)
-
-    // data.features.forEach((rect) => {
-    //     // coords.push(rect.geometry.coordinates[0][0])
-    //     //[rect.geometry.coordinates[0][3][1], rect.geometry.coordinates[0][3][0]]
-
-    //     // console.log(rect.geometry.coordinates[0][0])
-    //     // var marker = L.marker([rect.geometry.coordinates[0][3][1], rect.geometry.coordinates[0][3][0]], { opacity: 0.01 })
-    //     // console.log(marker)
-    //     // console.log(rect.geometry.coordinates[0][3][1])
-    //     text = "lat: " + rect.geometry.coordinates[0][3][1].toString() + " lon: " + rect.geometry.coordinates[0][3][0].toString()
-
-    //     // text = "Hello!"
-
-    //     textMarker = L.popup({
-    //             // keepInView: false,
-    //             closeButton: false,
-    //             className: "coordinatesText",
-    //             closeOnClick: false,
-    //             autoPan: false,
-    //             offset: (50, 3),
-    //             keepInView: true,
-    //             zoomAnimation: false
-    //         })
-    //         .setLatLng([rect.geometry.coordinates[0][3][1], rect.geometry.coordinates[0][3][0]])
-    //         .setContent(text)
-    //         .addTo(map);
-
-    //     // console.log(textMarker._latlng)
-    // })
-
     var positions = L.geoJSON(data, {
       style: positiosStyles,
     });
     positions.addTo(map);
-
-    // $('.leaflet-interactive').on('click', function() {
-    //     console.log(this)
-    //         //parse lat and lng from the divs data attribute
-    //     var latlng = $(this).data().point.split(',');
-    //
-    // })
 
     positions.on("click", function (e) {
       console.log(e.latlng); // e is an event object (MouseEvent in this case)
