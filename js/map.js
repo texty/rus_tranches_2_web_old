@@ -21,7 +21,8 @@ L.tileLayer(
 // https://raw.githubusercontent.com/HubashovD/project_mykolaiv_shelling_web/main/tiles/tileset/{z}/{x}/{y}.png
 
 L.tileLayer(
-  "https://texty.org.ua/d/2022/mykolaiv_shelling_tiles/tiles_webp/ts/{z}/{x}/{y}.webp",
+  //   "https://texty.org.ua/d/2022/mykolaiv_shelling_tiles/tiles_webp/ts/{z}/{x}/{y}.webp",
+  "https://raw.githubusercontent.com/texty/rus_tranches_2_web/main/tiles/tiles/{z}/{x}/{y}.png",
   {
     maxZoom: 17,
     minZoom: 11,
