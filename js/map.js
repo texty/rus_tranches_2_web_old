@@ -42,7 +42,7 @@ map.on("drag", function () {
 var frontLineStyles = {
   color: "#f3a6b2",
   fillColor: "none",
-  "stroke-width": 10,
+  "stroke-width": 5,
 };
 
 fetch("data/front_line.geojson")
@@ -57,81 +57,57 @@ fetch("data/front_line.geojson")
     geoData.addTo(map);
   });
 
-var positiosStyles = {
-  color: "transperent",
-  fillColor: "transperent",
-  "stroke-width": 1,
-};
-
-fetch("data/artilerry position.geojson")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    var positions = L.geoJSON(data, {
-      style: positiosStyles,
-    });
-    positions.addTo(map);
-
-    positions.on("click", function (e) {
-      console.log(e.latlng); // e is an event object (MouseEvent in this case)
-      var lat = e.latlng.lat;
-      var lng = e.latlng.lng;
-      var zoom = 17;
-      map.setView([lat, lng], zoom);
-    });
-  });
-
-var shellingTrianglesStyles = {
+var tranchesStyles = {
   color: "black",
-  opacity: 0.9,
-  "stroke-width": 1,
+  fillColor: "none",
+  "stroke-width": 5,
 };
 
-var shelling_points = {
-  color: "#f3a6b2",
-  opacity: 0.9,
-  "stroke-width": 1,
-};
-
-var shellingTriangle2 = {
-  color: "black",
-  opacity: 0.9,
-  "stroke-width": 1,
-};
-
-fetch("data/shelling_triangles.geojson")
+fetch("data/tranches.geojson")
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
     geoData = L.geoJSON(data, {
-      style: shellingTrianglesStyles,
+      style: tranchesStyles,
     });
-    geoData.setStyle({ className: "shellingTriangle" });
+    geoData.setStyle({ className: "tranches" });
     geoData.addTo(map);
   });
 
-fetch("data/shelling_points.geojson")
+var tranches_routesStyles = {
+  color: "yellow",
+  fillColor: "none",
+  "stroke-width": 10,
+};
+
+fetch("data/tranches_routes.geojson")
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
     geoData = L.geoJSON(data, {
-      style: shellingTrianglesStyles,
+      style: tranches_routesStyles,
     });
-    geoData.setStyle({ className: "shelling-points" });
+    geoData.setStyle({ className: "tranches_routes" });
     geoData.addTo(map);
   });
 
-fetch("data/shelling_triangles_2.geojson")
+var tranches_routesStyles = {
+  color: "yellow",
+  fillColor: "none",
+  "stroke-width": 20,
+  opacity: 0.5,
+};
+
+fetch("data/tank_lines.geojson")
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
     geoData = L.geoJSON(data, {
-      style: shellingTrianglesStyles,
+      style: tranches_routesStyles,
     });
-    geoData.setStyle({ className: "shelling-triangle-2" });
+    geoData.setStyle({ className: "tank_lines" });
     geoData.addTo(map);
   });

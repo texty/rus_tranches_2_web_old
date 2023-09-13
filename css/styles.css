@@ -1,486 +1,485 @@
 @font-face {
-    font-family: "CHARTERC";
-    src: url("../fonts/CHARTERC.OTF") format("opentype")
+  font-family: "CHARTERC";
+  src: url("../fonts/CHARTERC.OTF") format("opentype");
 }
 
 @font-face {
-    font-family: "CHARTERC-bold";
-    src: url("../fonts/CHARTERC-BOLD.OTF") format("opentype")
+  font-family: "CHARTERC-bold";
+  src: url("../fonts/CHARTERC-BOLD.OTF") format("opentype");
 }
 
 @font-face {
-    font-family: "proxima-medium";
-    src: url("../fonts/PROXIMA-NOVA-A-MEDIUM.OTF") format("opentype")
+  font-family: "proxima-medium";
+  src: url("../fonts/PROXIMA-NOVA-A-MEDIUM.OTF") format("opentype");
 }
 
 @font-face {
-    font-family: "proxima-bold";
-    src: url("../fonts/PROXIMA-NOVA-A-BOLD.OTF") format("opentype")
+  font-family: "proxima-bold";
+  src: url("../fonts/PROXIMA-NOVA-A-BOLD.OTF") format("opentype");
 }
 
 @font-face {
-    font-family: "proxima-semi";
-    src: url("../fonts/PROXIMA-NOVA-A-SEMIBOLD.OTF") format("opentype")
+  font-family: "proxima-semi";
+  src: url("../fonts/PROXIMA-NOVA-A-SEMIBOLD.OTF") format("opentype");
 }
 
 @media (max-width: 479px) {
-    #main-logo {
-        width: 50% !important;
-    }
-    #fb {
-        width: 10vw !important;
-    }
-    #tw {
-        width: 10vw !important;
-    }
-    #cover {
-        height: 100% !important;
-    }
-    #title-wrapper {
-        margin-left: 0 !important;
-        margin-top: 30% !important;
-    }
-    #title-wrapper h1 {
-        width: 80% !important;
-        margin: auto !important;
-        font-size: 40px !important;
-    }
-    #title-wrapper h2 {
-        width: 80% !important;
-        margin: auto !important;
-        margin-top: 10% !important;
-        font-size: 30px !important;
-    }
-    #lead {
-        display: none;
-    }
-    #lead-mobile {
-        display: block !important;
-        font-size: 20px !important;
-        font-family: "proxima-semi";
-        margin: auto;
-        text-align: left;
-        margin-left: 10%;
-        margin-right: 10%;
-        line-height: 1.5;
-    }
-    .simple-text {
-        width: 70% !important;
-        font-size: 20px !important;
-    }
-    .h3-header {
-        margin: auto !important;
-        text-align: center;
-        margin-top: 10% !important;
-        font-size: 40px !important;
-    }
-    #staticMapsBlock {
-        display: block !important;
-    }
-    #staticMapWrapper {
-        position: sticky;
-        top: 0px !important;
-        z-index: 999 !important;
-        margin-bottom: 10%;
-    }
-    #staticMap {
-        width: 100% !important;
-        height: 50% !important;
-        margin-top: 0 !important;
-    }
-    #mapBlocks {
-        width: 100% !important;
-        height: 50vh !important;
-        z-index: 2 !important;
-    }
-    #map {
-        height: 50vh !important;
-    }
-    #textBlocks {
-        width: 100vw !important;
-        z-index: 1 !important;
-    }
-    .step {
-        width: 100% !important;
-        margin-right: 10px;
-        padding: auto;
-    }
-    .step p {
-        padding-left: 0;
-        padding-right: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-        margin-left: 10% !important;
-        margin-right: 10% !important;
-        font-size: 20px !important;
-    }
-    .h4-header {
-        font-size: 24px !important;
-        margin-left: 5% !important;
-        margin-right: 5% !important;
-        padding-right: 0px !important;
-        padding-left: 0px !important;
-        padding-top: 0px !important;
-        padding-bottom: 0px !important;
-    }
-    .donate-us p {
-        align-items: center !important;
-        margin-left: 5vw !important;
-    }
-    .rubrics-container {
-        display: none !important;
-    }
-    #menu-wrapper {
-        display: block !important;
-    }
+  #main-logo {
+    width: 50% !important;
+  }
+  #fb {
+    width: 10vw !important;
+  }
+  #tw {
+    width: 10vw !important;
+  }
+  #cover {
+    height: 100% !important;
+  }
+  #title-wrapper {
+    margin-left: 0 !important;
+    margin-top: 30% !important;
+  }
+  #title-wrapper h1 {
+    width: 80% !important;
+    margin: auto !important;
+    font-size: 40px !important;
+  }
+  #title-wrapper h2 {
+    width: 80% !important;
+    margin: auto !important;
+    margin-top: 10% !important;
+    font-size: 30px !important;
+  }
+  #lead {
+    display: none;
+  }
+  #lead-mobile {
+    display: block !important;
+    font-size: 20px !important;
+    font-family: "proxima-semi";
+    margin: auto;
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 10%;
+    line-height: 1.5;
+  }
+  .simple-text {
+    width: 70% !important;
+    font-size: 20px !important;
+  }
+  .h3-header {
+    margin: auto !important;
+    text-align: center;
+    margin-top: 10% !important;
+    font-size: 40px !important;
+  }
+  #staticMapsBlock {
+    display: block !important;
+  }
+  #staticMapWrapper {
+    position: sticky;
+    top: 0px !important;
+    z-index: 999 !important;
+    margin-bottom: 10%;
+  }
+  #staticMap {
+    width: 100% !important;
+    height: 50% !important;
+    margin-top: 0 !important;
+  }
+  #mapBlocks {
+    width: 100% !important;
+    height: 50vh !important;
+    z-index: 2 !important;
+  }
+  #map {
+    height: 50vh !important;
+  }
+  #textBlocks {
+    width: 100vw !important;
+    z-index: 1 !important;
+  }
+  .step {
+    width: 100% !important;
+    margin-right: 10px;
+    padding: auto;
+  }
+  .step p {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+    font-size: 20px !important;
+  }
+  .h4-header {
+    font-size: 24px !important;
+    margin-left: 5% !important;
+    margin-right: 5% !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
+  .donate-us p {
+    align-items: center !important;
+    margin-left: 5vw !important;
+  }
+  .rubrics-container {
+    display: none !important;
+  }
+  #menu-wrapper {
+    display: block !important;
+  }
 }
 
 @media (min-width: 481px) and (max-width: 1023px) {
-    .rubrics-container {
-        display: none !important;
-    }
-    #menu-wrapper {
-        display: block !important;
-    }
-    #main-logo {
-        width: 20% !important;
-    }
-    #fb {
-        width: 3vw !important;
-    }
-    #tw {
-        width: 3vw !important;
-    }
-    #cover {
-        height: 100% !important;
-    }
-    #title-wrapper {
-        margin-left: 0 !important;
-    }
-    #title-wrapper h1 {
-        width: 80% !important;
-        margin: auto !important;
-        font-size: 50px !important;
-    }
-    #title-wrapper h2 {
-        width: 80% !important;
-        margin: auto !important;
-        margin-top: 10% !important;
-        font-size: 40px !important;
-    }
-    #lead {
-        width: 80% !important;
-        margin-top: 25% !important;
-        font-size: 24px !important;
-    }
-    #lead-mobile {
-        display: none;
-    }
-    .simple-text {
-        width: 70% !important;
-        font-size: 20px !important;
-    }
-    .h3-header {
-        margin: auto !important;
-        text-align: center;
-        margin-top: 10% !important;
-        font-size: 40px !important;
-    }
-    #staticMapsBlock {
-        display: block !important;
-    }
-    #staticMapWrapper {
-        position: sticky;
-        top: 0px !important;
-        z-index: 999 !important;
-        margin-bottom: 10%;
-    }
-    #staticMap {
-        width: 100% !important;
-        height: 50% !important;
-        margin-top: 0 !important;
-    }
-    #mapBlocks {
-        width: 100% !important;
-        height: 50vh !important;
-        z-index: 2 !important;
-    }
-    #map {
-        height: 50vh !important;
-    }
-    #textBlocks {
-        width: 100vw !important;
-        z-index: 1 !important;
-    }
-    .step {
-        width: 100% !important;
-        margin-right: 10px;
-        padding: auto;
-    }
-    .step p {
-        padding-left: 0;
-        padding-right: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-        margin-left: 10% !important;
-        margin-right: 10% !important;
-        font-size: 20px !important;
-    }
-    .h4-header {
-        font-size: 30px !important;
-        margin-left: 5% !important;
-        margin-right: 5% !important;
-        padding-right: 0px !important;
-        padding-left: 0px !important;
-        padding-top: 0px !important;
-        padding-bottom: 0px !important;
-    }
-    .donate-us {
-        align-items: center !important;
-        width: 80% !important;
-    }
+  .rubrics-container {
+    display: none !important;
+  }
+  #menu-wrapper {
+    display: block !important;
+  }
+  #main-logo {
+    width: 20% !important;
+  }
+  #fb {
+    width: 3vw !important;
+  }
+  #tw {
+    width: 3vw !important;
+  }
+  #cover {
+    height: 100% !important;
+  }
+  #title-wrapper {
+    margin-left: 0 !important;
+  }
+  #title-wrapper h1 {
+    width: 80% !important;
+    margin: auto !important;
+    font-size: 50px !important;
+  }
+  #title-wrapper h2 {
+    width: 80% !important;
+    margin: auto !important;
+    margin-top: 10% !important;
+    font-size: 40px !important;
+  }
+  #lead {
+    width: 80% !important;
+    margin-top: 25% !important;
+    font-size: 24px !important;
+  }
+  #lead-mobile {
+    display: none;
+  }
+  .simple-text {
+    width: 70% !important;
+    font-size: 20px !important;
+  }
+  .h3-header {
+    margin: auto !important;
+    text-align: center;
+    margin-top: 10% !important;
+    font-size: 40px !important;
+  }
+  #staticMapsBlock {
+    display: block !important;
+  }
+  #staticMapWrapper {
+    position: sticky;
+    top: 0px !important;
+    z-index: 999 !important;
+    margin-bottom: 10%;
+  }
+  #staticMap {
+    width: 100% !important;
+    height: 50% !important;
+    margin-top: 0 !important;
+  }
+  #mapBlocks {
+    width: 100% !important;
+    height: 50vh !important;
+    z-index: 2 !important;
+  }
+  #map {
+    height: 50vh !important;
+  }
+  #textBlocks {
+    width: 100vw !important;
+    z-index: 1 !important;
+  }
+  .step {
+    width: 100% !important;
+    margin-right: 10px;
+    padding: auto;
+  }
+  .step p {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+    font-size: 20px !important;
+  }
+  .h4-header {
+    font-size: 30px !important;
+    margin-left: 5% !important;
+    margin-right: 5% !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
+  .donate-us {
+    align-items: center !important;
+    width: 80% !important;
+  }
 }
 
 .header-wrapper {
-    font-family: 'Roboto Mono', monospace;
-    width: 90%;
-    margin: 10px auto 50px auto;
-    -webkit-box-align: center;
-    align-items: center;
-    position: absolute;
+  font-family: "Roboto Mono", monospace;
+  width: 90%;
+  margin: 10px auto 50px auto;
+  -webkit-box-align: center;
+  align-items: center;
+  position: absolute;
 }
 
 .share-btn {
-    font-family: 'Noto Sans', sans-serif;
-    letter-spacing: 1px;
-    text-align: center;
-    line-height: 1.6;
+  font-family: "Noto Sans", sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  line-height: 1.6;
 }
 
 .fa-facebook {
-    letter-spacing: 1px;
-    text-align: center;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    font-family: "Font Awesome 5 Brands";
-    box-sizing: content-box;
-    margin: 0.5em;
-    cursor: pointer;
-    width: 1em;
-    height: 1em;
-    border: 1px solid #616161;
-    color: #a6a6a6;
-    border-radius: 50%;
-    padding: 0.5em;
-    font-size: 2.0em;
-    line-height: 1;
-    transition: all 0.5s;
-    stroke: white;
+  letter-spacing: 1px;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  font-family: "Font Awesome 5 Brands";
+  box-sizing: content-box;
+  margin: 0.5em;
+  cursor: pointer;
+  width: 1em;
+  height: 1em;
+  border: 1px solid #616161;
+  color: #a6a6a6;
+  border-radius: 50%;
+  padding: 0.5em;
+  font-size: 2em;
+  line-height: 1;
+  transition: all 0.5s;
+  stroke: white;
 }
 
 .fa-twitter {
-    letter-spacing: 1px;
-    text-align: center;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    font-family: "Font Awesome 5 Brands";
-    box-sizing: content-box;
-    margin: 0.5em;
-    cursor: pointer;
-    width: 1em;
-    height: 1em;
-    border: 1px solid #616161;
-    color: #a6a6a6;
-    border-radius: 50%;
-    padding: 0.5em;
-    font-size: 2.0em;
-    line-height: 1;
-    transition: all 0.5s;
+  letter-spacing: 1px;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  font-family: "Font Awesome 5 Brands";
+  box-sizing: content-box;
+  margin: 0.5em;
+  cursor: pointer;
+  width: 1em;
+  height: 1em;
+  border: 1px solid #616161;
+  color: #a6a6a6;
+  border-radius: 50%;
+  padding: 0.5em;
+  font-size: 2em;
+  line-height: 1;
+  transition: all 0.5s;
 }
 
 #socio-icons {
-    margin-left: 3vw;
-    font-family: 'Roboto Mono', monospace;
-    display: flex;
-    -webkit-box-pack: start;
-    justify-content: flex-start;
-    position: absolute;
+  margin-left: 3vw;
+  font-family: "Roboto Mono", monospace;
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  position: absolute;
 }
 
 .icon-wrapper {
-    font-family: 'Roboto Mono', monospace;
-    display: flex;
-    -webkit-box-pack: start;
-    justify-content: flex-start;
+  font-family: "Roboto Mono", monospace;
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
 }
 
 #tw {
-    font-family: 'Roboto Mono', monospace;
-    margin-left: 0.5vw;
+  font-family: "Roboto Mono", monospace;
+  margin-left: 0.5vw;
 }
 
 #fb {
-    font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 
 #cover {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 
 #menu-wrapper {
-    grid-template-columns: 1fr 6fr;
-    width: 100%;
-    display: grid;
+  grid-template-columns: 1fr 6fr;
+  width: 100%;
+  display: grid;
 }
 
 #main-logo {
-    grid-column: 1;
-    position: relative;
-    margin-left: 3vw;
-    margin-top: 2vh;
-    width: 10vw;
+  grid-column: 1;
+  position: relative;
+  margin-left: 3vw;
+  margin-top: 2vh;
+  width: 10vw;
 }
 
 .rubrics-container {
-    grid-column: 2;
-    margin-top: 1%;
-    position: relative;
-    font-family: 'ProximaNova', sans-serif;
-    font-size: 20px;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  grid-column: 2;
+  margin-top: 1%;
+  position: relative;
+  font-family: "ProximaNova", sans-serif;
+  font-size: 20px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .rubric {
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: white;
-    margin: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+  margin: auto;
 }
 
 .rubric a span {
-    color: white !important;
+  color: white !important;
 }
 
 #cover-wrapper {
-    width: 100%;
-    height: 100%;
-    opacity: 0.5;
-    background-color: black;
-    position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  background-color: black;
+  position: absolute;
 }
 
 #title-wrapper {
-    position: absolute;
-    /* width: 100%; */
-    margin: auto;
-    padding: auto;
-    margin-top: 10%;
-    /* margin-left: 25%; */
+  position: absolute;
+  /* width: 100%; */
+  margin: auto;
+  padding: auto;
+  margin-top: 10%;
+  /* margin-left: 25%; */
 }
 
 #title-wrapper h1 {
-    color: white;
-    font-family: 'CHARTERC-bold';
-    font-size: 70px;
-    margin: auto;
-    text-align: center;
-    margin-top: 10%;
+  color: white;
+  font-family: "CHARTERC-bold";
+  font-size: 70px;
+  margin: auto;
+  text-align: center;
+  margin-top: 10%;
 }
 
 #title-wrapper h2 {
-    color: white;
-    font-family: 'CHARTERC-bold';
-    font-size: 40px;
-    margin: auto;
-    text-align: center;
-    margin-bottom: 3%;
+  color: white;
+  font-family: "CHARTERC-bold";
+  font-size: 40px;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 3%;
 }
 
 #lead {
-    width: 60%;
-    font-size: 24px;
-    font-family: "proxima-semi";
-    margin: auto;
-    text-align: justify;
-    color: white;
+  width: 60%;
+  font-size: 24px;
+  font-family: "proxima-semi";
+  margin: auto;
+  text-align: justify;
+  color: white;
 }
 
 #lead-mobile {
-    display: none;
+  display: none;
 }
 
 #autors {
-    margin-left: 25%;
-    font-family: "proxima-semi";
-    font-size: 24px;
+  margin-left: 25%;
+  font-family: "proxima-semi";
+  font-size: 24px;
 }
 
 a:link {
-    color: #f3a6b2;
+  color: #f3a6b2;
 }
 
 .red-d {
-    color: #f3a6b2;
+  color: #f3a6b2;
 }
 
 .simple-text {
-    width: 50%;
-    margin: auto;
-    margin-top: 15px;
-    font: 24px "proxima-medium";
-    color: #000000;
-    text-align: left;
-    line-height: 35px;
+  width: 50%;
+  margin: auto;
+  margin-top: 15px;
+  font: 24px "proxima-medium";
+  color: #000000;
+  text-align: left;
+  line-height: 35px;
 }
 
 .h3-header {
-    font-size: 50px;
-    font-family: 'CHARTERC-bold';
-    margin-left: 25%;
+  font-size: 50px;
+  font-family: "CHARTERC-bold";
+  margin-left: 25%;
 }
 
 #scrolly {
-    margin-top: 5%;
+  margin-top: 5%;
 }
 
 #staticMapsBlock {
-    display: grid;
-    grid-template-columns: 40% 60%;
-    transition: 2s;
-    object-fit: cover;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  transition: 2s;
+  object-fit: cover;
 }
 
 #staticMapsBlockText {
-    grid-column: 1;
+  grid-column: 1;
 }
 
 #staticMapWrapper {
-    position: sticky;
-    top: 10%;
-    grid-column: 2;
-    margin-right: 10px;
+  position: sticky;
+  top: 10%;
+  grid-column: 2;
+  margin-right: 10px;
 }
 
 #staticMap {
-    width: 100%;
-    /* height: 700px; */
+  width: 100%;
+  /* height: 700px; */
 }
-
 
 /* #mainTable {
     display: grid;
@@ -488,230 +487,251 @@ a:link {
 } */
 
 #textBlocks {
-    /* grid-column: 1; */
-    width: 40%;
-    position: relative;
-    z-index: 999;
-    background: rgba(0, 0, 0, .6);
+  /* grid-column: 1; */
+  width: 40%;
+  position: relative;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 #text-wrapper {
-    background-color: white;
-    width: 40%;
-    height: 100vh;
-    opacity: 0.5;
-    z-index: 998;
+  background-color: white;
+  width: 40%;
+  height: 100vh;
+  opacity: 0.5;
+  z-index: 998;
 }
 
 #mapBlocks {
-    /* position: sticky; */
-    position: sticky;
-    top: 0px;
-    width: 100%;
-    margin: auto;
-    height: 100vh;
+  /* position: sticky; */
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  margin: auto;
+  height: 100vh;
 }
 
 #map {
-    height: 100%;
-    width: 100%;
-    margin: auto;
+  height: 100%;
+  width: 100%;
+  margin: auto;
 }
 
 .step {
-    min-height: 99vh;
-    width: 95%;
-    /* border: 3px solid black; */
-    margin-right: 10px;
-    padding: auto;
-    height: fit-content;
+  min-height: 99vh;
+  width: 95%;
+  /* border: 3px solid black; */
+  margin-right: 10px;
+  padding: auto;
+  height: fit-content;
 }
 
 .step h5 {
-    display: none;
+  display: none;
 }
 
 .h4-header {
-    /* background-color: white; */
-    font-family: "proxima-bold";
-    font-size: 40px;
-    text-align: justify;
-    margin-left: 15%;
-    margin-right: 5%;
-    /* background-color: white; */
-    padding-right: 30px;
-    padding-left: 30px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    color: white;
+  /* background-color: white; */
+  font-family: "proxima-bold";
+  font-size: 40px;
+  text-align: justify;
+  margin-left: 15%;
+  margin-right: 5%;
+  /* background-color: white; */
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  color: white;
 }
 
 .step .blackP {
-    color: #000000 !important;
+  color: #24416e !important;
 }
 
 .step p {
-    font-size: 24px;
-    font-family: "proxima-medium";
-    text-align: left;
-    margin-left: 15%;
-    margin-right: 5%;
-    /* background-color: white; */
-    padding-right: 30px;
-    padding-left: 30px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    color: white;
-    line-height: 1.5;
+  font-size: 24px;
+  font-family: "proxima-medium";
+  text-align: left;
+  margin-left: 15%;
+  margin-right: 5%;
+  /* background-color: white; */
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  color: white;
+  line-height: 1.5;
 }
 
 #barchart {
-    width: auto;
+  width: auto;
 }
 
 #scroll-final {
-    height: 150vh;
-    z-index: 1;
-    pointer-events: none;
+  height: 150vh;
+  z-index: 1;
+  pointer-events: none;
 }
 
 #legendBlock {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .frontline {
-    stroke-width: 5px;
+  stroke-width: 5px;
 }
 
 #frontlineBlock {
-    grid-column: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: auto;
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: auto;
 }
 
 #frontLineMarker {
-    grid-column: 1;
-    grid-row: 1;
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
+  grid-column: 1;
+  grid-row: 1;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
 }
 
 #frontLineMarker:before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    border-top: 10px solid red;
-    width: 100%;
-    transform: translateY(-50%);
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  border-top: 10px solid red;
+  width: 100%;
+  transform: translateY(-50%);
 }
 
 #frontLineText {
-    grid-column: 2;
-    grid-row: 1;
+  grid-column: 2;
+  grid-row: 1;
 }
 
 #positionBlock {
-    grid-column: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: auto;
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: auto;
 }
 
 #positionLineMarker {
-    grid-column: 1;
-    grid-row: 1;
-    border: 5px solid yellow;
-    width: 50px;
-    height: 50px;
+  grid-column: 1;
+  grid-row: 1;
+  border: 5px solid yellow;
+  width: 50px;
+  height: 50px;
+}
+
+.tranches_routes {
+  position: relative;
+  width: 200px; /* Ширина элемента */
+  height: 10px; /* Высота элемента */
+  background-color: transparent; /* Прозрачный фон */
+}
+
+.tranches_routes::before,
+.tranches_routes::after {
+  content: ""; /* Пустое содержимое для псевдо-элемента */
+  position: absolute;
+  top: 0;
+  width: 100%; /* Ширина на всю длину родительского элемента */
+  height: 5px; /* Высота половины родительского элемента */
+  background-color: #000; /* Цвет линии */
+}
+
+.tranches_routes::after {
+  top: 5px; /* Сдвигаем вторую линию на половину высоты родительского элемента */
 }
 
 #positionLineText {
-    grid-column: 2;
-    grid-row: 1;
+  grid-column: 2;
+  grid-row: 1;
 }
 
 .shellingTriangle {
-    opacity: 0;
-    stroke-opacity: 1;
-    stroke-width: 2;
-    stroke-linecap: square;
-    stroke-linejoin: miter;
-    fill: #000000;
-    fill-opacity: 0;
+  opacity: 0;
+  stroke-opacity: 1;
+  stroke-width: 2;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  fill: #000000;
+  fill-opacity: 0;
 }
 
 .shelling-points {
-    opacity: 0;
-    fill-opacity: 0;
+  opacity: 0;
+  fill-opacity: 0;
 }
 
 .shelling-triangle-2 {
-    opacity: 0;
-    stroke-opacity: 1;
-    stroke-width: 2;
-    stroke-linecap: square;
-    stroke-linejoin: miter;
-    fill: #000000;
-    fill-opacity: 0;
+  opacity: 0;
+  stroke-opacity: 1;
+  stroke-width: 2;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  fill: #000000;
+  fill-opacity: 0;
 }
 
 .donate-us {
-    font-family: sans-serif;
-    margin: 80px auto 30px auto;
-    max-width: 800px;
+  font-family: sans-serif;
+  margin: 80px auto 30px auto;
+  max-width: 800px;
 }
 
 .donate-button {
-    font-family: sans-serif;
-    border-bottom: 0;
-    text-decoration: none;
-    cursor: pointer;
-    width: max-content;
-    margin: auto;
-    min-height: 50px;
-    padding: 10px;
-    color: white;
-    background-color: #ed6746;
-    display: flex;
+  font-family: sans-serif;
+  border-bottom: 0;
+  text-decoration: none;
+  cursor: pointer;
+  width: max-content;
+  margin: auto;
+  min-height: 50px;
+  padding: 10px;
+  color: white;
+  background-color: #ed6746;
+  display: flex;
 }
 
 .donate-p {
-    font-family: sans-serif;
-    cursor: pointer;
-    color: white;
-    width: 100%;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin: auto !important;
-    font-weight: 600;
+  font-family: sans-serif;
+  cursor: pointer;
+  color: white;
+  width: 100%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: auto !important;
+  font-weight: 600;
 }
 
 #created_texty {
-    font-family: 'Noto Sans', sans-serif;
-    color: #33302e;
-    line-height: 1.6;
-    letter-spacing: 1px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
-    align-content: center;
-    margin: 4em 15% 4em 15%;
+  font-family: "Noto Sans", sans-serif;
+  color: #33302e;
+  line-height: 1.6;
+  letter-spacing: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  margin: 4em 15% 4em 15%;
 }
 
 #end-logo {
-    width: 30vw;
-    max-width: 200px;
+  width: 30vw;
+  max-width: 200px;
 }
 
 #end-text {
-    text-align: center;
+  text-align: center;
 }
