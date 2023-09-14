@@ -7,28 +7,41 @@ scroller
     step: ".step",
   })
   .onStepEnter((response) => {
-    var screenWidth = window.screen.width; // если эта переменная не используется, можно удалить эту строку
     console.log(response.element.attributes.datacoords.value);
     let coords = response.element.attributes.datacoords.value;
     let zoom = response.element.attributes.datazoom.value;
-    map.flyTo(coords.split(","), zoom);
+    console.log(coords);
+    console.log(zoom);
 
-    let elems = response.element.attributes.dataobject.value.split(",");
-    console.log(elems);
-    for (let i = 0; i < elems.length; i++) {
-      let paths = document.getElementsByClassName(elems[i]);
-      for (let j = 0; j < paths.length; j++) {
-        paths[j].setAttribute("stroke-opacity", "1"); // или '0' для полной прозрачности
+    map.once("moveend", function () {
+      // используйте .once вместо .on, чтобы обработчик выполнился только один раз
+      // Показываем объекты, указанные в objects_to_show
+      let objectsToShow = response.element.attributes.objects_to_show
+        ? response.element.attributes.objects_to_show.value.split(",")
+        : [];
+      console.log("add", objectsToShow);
+      for (let i = 0; i < objectsToShow.length; i++) {
+        let paths = document.getElementsByClassName(objectsToShow[i]);
+        console.log(paths);
+        for (let j = 0; j < paths.length; j++) {
+          paths[j].style.opacity = "0.6";
+        }
       }
-    }
+    });
+
+    map.flyTo(coords.split(","), zoom, { duration: 1.0 }); // 5 секунд для примера
   })
+
   .onStepExit((response) => {
-    let elems = response.element.attributes.dataobject.value.split(",");
-    console.log(elems);
-    for (let i = 0; i < elems.length; i++) {
-      let paths = document.getElementsByClassName(elems[i]);
+    // Убираем объекты, указанные в objects_to_remove
+    let objectsToRemove = response.element.attributes.objects_to_remove
+      ? response.element.attributes.objects_to_remove.value.split(",")
+      : [];
+    console.log("remove", objectsToRemove);
+    for (let i = 0; i < objectsToRemove.length; i++) {
+      let paths = document.getElementsByClassName(objectsToRemove[i]);
       for (let j = 0; j < paths.length; j++) {
-        paths[j].setAttribute("stroke-opacity", "0"); // или '0' для полной прозрачности
+        paths[j].style.opacity = "0";
       }
     }
   });

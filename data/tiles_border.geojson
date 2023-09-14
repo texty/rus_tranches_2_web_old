@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "tiles_border",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 35.467223397933786, 47.08111024509595 ], [ 35.467223397933786, 47.592863748590688 ], [ 36.25489997808134, 47.592863748590688 ], [ 36.25489997808134, 47.08111024509595 ], [ 35.467223397933786, 47.08111024509595 ] ] ] } }
+]
+}

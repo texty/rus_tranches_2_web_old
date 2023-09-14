@@ -631,26 +631,19 @@ a:link {
   height: 50px;
 }
 
-.tranches_routes {
-  position: relative;
-  width: 200px; /* Ширина элемента */
-  height: 10px; /* Высота элемента */
-  background-color: transparent; /* Прозрачный фон */
+.tranches_routes,
+.tank_lines,
+.pyramids,
+.tranches {
+  stroke: yellow; /* Цвет линии; замените на свой цвет по желанию */
+  /* stroke-opacity: 0; Полупрозрачность линии */
+  opacity: 0;
+  /* Эффект свечения с размытием */
+  filter: drop-shadow(0 0 10vw yellow);
+  stroke-width: 1; /* Ширина линии */
 }
 
-.tranches_routes::before,
-.tranches_routes::after {
-  content: ""; /* Пустое содержимое для псевдо-элемента */
-  position: absolute;
-  top: 0;
-  width: 100%; /* Ширина на всю длину родительского элемента */
-  height: 5px; /* Высота половины родительского элемента */
-  background-color: #000; /* Цвет линии */
-}
-
-.tranches_routes::after {
-  top: 5px; /* Сдвигаем вторую линию на половину высоты родительского элемента */
-}
+/* .tranches_routes .tank_lines .pyramids  */
 
 #positionLineText {
   grid-column: 2;

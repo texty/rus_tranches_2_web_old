@@ -22,7 +22,7 @@ L.tileLayer(
 
 L.tileLayer(
   //   "https://texty.org.ua/d/2022/mykolaiv_shelling_tiles/tiles_webp/ts/{z}/{x}/{y}.webp",
-  "https://raw.githubusercontent.com/texty/rus_tranches_2_web/main/tiles/tiles/{z}/{x}/{y}.png",
+  "https://raw.githubusercontent.com/texty/rus_tranches_2_web/main/tiles/{z}/{x}/{y}.png",
   {
     maxZoom: 17,
     minZoom: 11,
@@ -39,9 +39,14 @@ map.on("drag", function () {
   map.panInsideBounds(bounds, { animate: true });
 });
 
-var frontLineStyles = {
-  color: "#f3a6b2",
+var tranchesStyles = {
   fillColor: "none",
+  // "stroke-width": 5,
+};
+
+var frontLineStyles = {
+  fillColor: "none",
+  color: "#f3a6b2",
   "stroke-width": 5,
 };
 
@@ -57,12 +62,6 @@ fetch("data/front_line.geojson")
     geoData.addTo(map);
   });
 
-var tranchesStyles = {
-  color: "black",
-  fillColor: "none",
-  "stroke-width": 5,
-};
-
 fetch("data/tranches.geojson")
   .then(function (response) {
     return response.json();
@@ -75,39 +74,38 @@ fetch("data/tranches.geojson")
     geoData.addTo(map);
   });
 
-var tranches_routesStyles = {
-  color: "yellow",
-  fillColor: "none",
-  "stroke-width": 10,
-};
+// fetch("data/tranches_routes.geojson")
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (data) {
+//     geoData = L.geoJSON(data, {
+//       style: tranchesStyles,
+//     });
+//     geoData.setStyle({ className: "tranches_routes" });
+//     geoData.addTo(map);
+//   });
 
-fetch("data/tranches_routes.geojson")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    geoData = L.geoJSON(data, {
-      style: tranches_routesStyles,
-    });
-    geoData.setStyle({ className: "tranches_routes" });
-    geoData.addTo(map);
-  });
+// fetch("data/tank_lines.geojson")
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (data) {
+//     geoData = L.geoJSON(data, {
+//       style: tranchesStyles,
+//     });
+//     geoData.setStyle({ className: "tank_lines" });
+//     geoData.addTo(map);
+//   });
 
-var tranches_routesStyles = {
-  color: "yellow",
-  fillColor: "none",
-  "stroke-width": 20,
-  opacity: 0.5,
-};
-
-fetch("data/tank_lines.geojson")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    geoData = L.geoJSON(data, {
-      style: tranches_routesStyles,
-    });
-    geoData.setStyle({ className: "tank_lines" });
-    geoData.addTo(map);
-  });
+// fetch("data/pyramids.geojson")
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (data) {
+//     geoData = L.geoJSON(data, {
+//       style: tranchesStyles,
+//     });
+//     geoData.setStyle({ className: "pyramids" });
+//     geoData.addTo(map);
+//   });
