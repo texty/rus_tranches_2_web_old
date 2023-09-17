@@ -25,8 +25,8 @@ const map = new mapboxgl.Map({
 
 map.addControl(new mapboxgl.NavigationControl(), "top-right");
 
-// map.scrollZoom.disable();
-// map.dragPan.disable();
+map.scrollZoom.disable();
+map.dragPan.disable();
 
 map.on("style.load", () => {
   map.addSource("mapbox-dem", {
