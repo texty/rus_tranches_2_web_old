@@ -4,16 +4,15 @@ mapboxgl.accessToken =
 var map_center = [35.5, 47.1];
 var main_zoom = 13;
 const bounds = [
-  [30.5121, 50.2234], // Southwest coordinates
-  [33.4476, 52.6351], // Northeast coordinates
+  [34, 46.0], // Southwest coordinates
+  [37, 48.0], // Northeast coordinates
 ];
 
 // "./data/osm_liberty.json",
 
 const map = new mapboxgl.Map({
   container: "map",
-  style: "data/positron2.json",
-  //style: 'mapbox://styles/mapbox/satellite-streets-v9',
+  style: "./data/osm_liberty.json",
   center: map_center,
   zoom: main_zoom,
   minZoom: 7,
@@ -26,8 +25,8 @@ const map = new mapboxgl.Map({
 
 map.addControl(new mapboxgl.NavigationControl(), "top-right");
 
-map.scrollZoom.disable(); // отключает зум с помощью колеса мыши
-map.dragPan.disable(); // отключает перемещение с помощью перетаскивания
+// map.scrollZoom.disable();
+// map.dragPan.disable();
 
 map.on("style.load", () => {
   map.addSource("mapbox-dem", {
@@ -41,7 +40,6 @@ map.on("style.load", () => {
 });
 
 map.on("load", function () {
-
   map.addSource("custom-tiles", {
     type: "raster",
     tiles: [
