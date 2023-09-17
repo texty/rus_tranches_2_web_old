@@ -48,14 +48,17 @@ map.on("load", function () {
     tileSize: 256,
   });
 
+  map.addLayer({
+    id: "custom-layer",
+    type: "raster",
+    source: "custom-tiles",
+  });
+
+  //   Додаємо джерела із файлів
+
   map.addSource("front_line", {
     type: "geojson",
     data: "data/front_line.geojson",
-  });
-
-  map.addSource("tranches", {
-    type: "geojson",
-    data: "data/tranches.geojson",
   });
 
   map.addSource("points", {
@@ -68,11 +71,7 @@ map.on("load", function () {
     data: "data/lines.geojson",
   });
 
-  map.addLayer({
-    id: "custom-layer",
-    type: "raster",
-    source: "custom-tiles",
-  });
+  //   Додаємо шари
 
   map.addLayer({
     id: "front_line-layer",
@@ -81,15 +80,6 @@ map.on("load", function () {
     paint: {
       "line-color": "#f3a6b2",
       "line-width": 5,
-    },
-  });
-
-  map.addLayer({
-    id: "tranches-layer",
-    type: "line",
-    source: "tranches",
-    paint: {
-      "line-color": "transparent",
     },
   });
 
@@ -116,6 +106,8 @@ map.on("load", function () {
       "line-opacity": 1,
     },
   });
+
+  //   Додаємо фільтри для шарів
 });
 
 map.on("click", function (event) {
@@ -148,3 +140,89 @@ function animate() {
 map.on("load", function () {
   animate();
 });
+
+// instantiate the scrollama
+const scroller = scrollama();
+
+// setup the instance, pass callback functions
+scroller
+  .setup({
+    step: ".step",
+  })
+  .onStepEnter((response) => {
+    console.log(response.element.attributes.datacoords.value);
+    let coords = response.element.attributes.datacoords.value.split(",");
+    let zoom = parseInt(response.element.attributes.datazoom.value);
+    console.log(coords);
+    console.log(zoom);
+
+    let polygons = response.element.attributes.datapoly
+      ? response.element.attributes.datapoly.value.split(",")
+      : [];
+
+    console.log(polygons);
+    let lines = response.element.attributes.datalines
+      ? response.element.attributes.datalines.value.split(",")
+      : [];
+
+    console.log(lines);
+    let points = response.element.attributes.datapoints
+      ? response.element.attributes.datapoints.value.split(",")
+      : [];
+
+    console.log(lines);
+
+    map.setFilter("lines-layer", [
+      "match",
+      ["get", "id"],
+      ...lines,
+      true,
+      false,
+    ]);
+    map.setFilter("points-layer", [
+      "match",
+      ["get", "id"],
+      ...points,
+      true,
+      false,
+    ]);
+
+    // Изменяем способ перелета к точке
+    map.flyTo({
+      center: [parseFloat(coords[1]), parseFloat(coords[0])],
+      zoom: zoom,
+      duration: 1.0,
+    });
+  })
+  .onStepExit((response) => {
+    let polygons = response.element.attributes.datapoly
+      ? response.element.attributes.datapoly.value.split(",")
+      : [];
+
+    console.log(polygons);
+    let lines = response.element.attributes.datalines
+      ? response.element.attributes.datalines.value.split(",")
+      : [];
+
+    console.log(lines);
+    let points = response.element.attributes.datapoints
+      ? response.element.attributes.datapoints.value.split(",")
+      : [];
+
+    console.log(lines);
+
+    map.setFilter("lines-layer", [
+      "match",
+      ["get", "id"],
+      ...lines,
+      true,
+      false,
+    ]);
+    map.setFilter("points-layer", [
+      "match",
+      ["get", "id"],
+      ...points,
+      true,
+      false,
+    ]);
+  });
