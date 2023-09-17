@@ -731,12 +731,15 @@ a:link {
 
 @keyframes pulse {
   0% {
+    radius: 1vw;
     stroke-width: 0.2vw;
   }
   50% {
+    radius: 2vw;
     stroke-width: 1vw;
   }
   100% {
+    radius: 1vw;
     stroke-width: 0.2vw;
   }
 }

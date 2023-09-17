@@ -99,6 +99,24 @@ fetch("data/points.geojson")
     geoData.addTo(map);
   });
 
+fetch("data/lines.geojson")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    geoData = L.geoJSON(data, {
+      style: function (feature) {
+        return {
+          color: "darkred", // Цвет линии
+          weight: 2, // Толщина линии
+          opacity: 1, // Прозрачность линии
+          className: feature.properties.class + " line", // Добавляем класс из свойств объекта и дополнительный класс "line"
+        };
+      },
+    });
+    geoData.addTo(map);
+  });
+
 map.on("click", function (event) {
   var lat = event.latlng.lat;
   var lng = event.latlng.lng;
