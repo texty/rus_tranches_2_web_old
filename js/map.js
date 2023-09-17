@@ -34,11 +34,25 @@ function setupTerrain() {
   map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
 }
 
-function addSource(id, type, data) {
-  map.addSource(id, { type, data });
+function addSource(id, type, sourceData) {
+  let sourceConfig = { type };
+
+  switch (type) {
+    case "raster":
+      sourceConfig.tiles = [sourceData];
+      break;
+    case "vector":
+      sourceConfig.url = sourceData;
+      break;
+    default:
+      sourceConfig.data = sourceData;
+      break;
+  }
+
+  map.addSource(id, sourceConfig);
 }
 
-function addLayer(id, type, source, paint) {
+function addLayer(id, type, source, paint = {}) {
   map.addLayer({ id, type, source, paint });
 }
 
@@ -137,6 +151,22 @@ function animateLine() {
   requestAnimationFrame(animateLine);
 }
 
+function createMatchFilter(valueList) {
+  // Если список пуст, возвращаем фильтр, который всегда возвращает false
+  if (!valueList || valueList.length === 0) {
+    return ["==", ["get", "id"], "nonexistent_value"];
+  }
+
+  // В противном случае создаем фильтр "match"
+  const matchFilter = ["match", ["get", "id"]];
+  valueList.forEach((value) => {
+    matchFilter.push(value, true);
+  });
+  matchFilter.push(false); // Это наш fallback output
+
+  return matchFilter;
+}
+
 // instantiate the scrollama
 const scroller = scrollama();
 
@@ -166,22 +196,10 @@ scroller
       ? response.element.attributes.datapoints.value.split(",")
       : [];
 
-    console.log(lines);
+    console.log(points);
 
-    map.setFilter("lines-layer", [
-      "match",
-      ["get", "id"],
-      ...lines,
-      true,
-      false,
-    ]);
-    map.setFilter("points-layer", [
-      "match",
-      ["get", "id"],
-      ...points,
-      true,
-      false,
-    ]);
+    map.setFilter("lines-layer", createMatchFilter(lines));
+    map.setFilter("points-layer", createMatchFilter(points));
 
     // Изменяем способ перелета к точке
     map.flyTo({
@@ -207,18 +225,6 @@ scroller
 
     console.log(lines);
 
-    map.setFilter("lines-layer", [
-      "match",
-      ["get", "id"],
-      ...lines,
-      true,
-      false,
-    ]);
-    map.setFilter("points-layer", [
-      "match",
-      ["get", "id"],
-      ...points,
-      true,
-      false,
-    ]);
+    map.setFilter("lines-layer", createMatchFilter(lines));
+    map.setFilter("points-layer", createMatchFilter(points));
   });
