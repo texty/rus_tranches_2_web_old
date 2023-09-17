@@ -4,8 +4,8 @@ mapboxgl.accessToken =
 var map_center = [35.5, 47.1];
 var main_zoom = 13;
 const bounds = [
-  [34, 46.0], // Southwest coordinates
-  [37, 48.0], // Northeast coordinates
+  [46, 34], // Southwest coordinates
+  [48, 37], // Northeast coordinates
 ];
 
 // "./data/osm_liberty.json",
@@ -15,12 +15,12 @@ const map = new mapboxgl.Map({
   style: "./data/osm_liberty.json",
   center: map_center,
   zoom: main_zoom,
-  minZoom: 7,
-  maxZoom: 14,
+  minZoom: 8,
+  maxZoom: 18,
   pitch: 0,
   bearing: 0,
   antialias: true,
-  maxBounds: bounds,
+  //   maxBounds: bounds,
 });
 
 map.addControl(new mapboxgl.NavigationControl(), "top-right");
