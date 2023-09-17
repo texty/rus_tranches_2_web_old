@@ -1,7 +1,7 @@
 var map = L.map("map", {
   scrollWheelZoom: false,
   zoomControl: false,
-}).setView([47.414641, 35.84587538436732], 12);
+}).setView([47.1, 35.5], 10);
 
 new L.Control.Zoom({ position: "topright" }).addTo(map);
 
@@ -13,7 +13,7 @@ L.tileLayer(
   "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
   {
     maxZoom: 17,
-    minZoom: 11,
+    minZoom: 10,
     attribution: "© OpenStreetMap",
   }
 ).addTo(map);
@@ -25,13 +25,13 @@ L.tileLayer(
   "https://raw.githubusercontent.com/texty/rus_tranches_2_web/main/tiles/{z}/{x}/{y}.png",
   {
     maxZoom: 17,
-    minZoom: 11,
+    minZoom: 10,
     attribution: "© Planet.com",
   }
 ).addTo(map);
 
-var southWest = L.latLng(47.1715612851653816, 35.595561905493966),
-  northEast = L.latLng(47.5127811161710554, 36.128494862082043);
+var southWest = L.latLng(46.0, 34.0),
+  northEast = L.latLng(48.0, 37.0);
 var bounds = L.latLngBounds(southWest, northEast);
 
 map.setMaxBounds(bounds);
@@ -48,6 +48,10 @@ var frontLineStyles = {
   fillColor: "none",
   color: "#f3a6b2",
   "stroke-width": 5,
+};
+
+var pointsStyles = {
+  fillColor: "none",
 };
 
 fetch("data/front_line.geojson")
@@ -73,6 +77,33 @@ fetch("data/tranches.geojson")
     geoData.setStyle({ className: "tranches" });
     geoData.addTo(map);
   });
+
+fetch("data/points.geojson")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    geoData = L.geoJSON(data, {
+      pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+          radius: 5, // Размер маркера
+          fillColor: "red",
+          color: "darkred",
+          weight: 2,
+          opacity: 1,
+          fillOpacity: 0.8,
+          className: feature.properties.class + " point",
+        });
+      },
+    });
+    geoData.addTo(map);
+  });
+
+map.on("click", function (event) {
+  var lat = event.latlng.lat;
+  var lng = event.latlng.lng;
+  console.log("Вы кликнули на координатах: " + lat + ", " + lng);
+});
 
 // fetch("data/tranches_routes.geojson")
 //   .then(function (response) {

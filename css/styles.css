@@ -639,7 +639,7 @@ a:link {
   /* stroke-opacity: 0; Полупрозрачность линии */
   opacity: 0;
   /* Эффект свечения с размытием */
-  filter: drop-shadow(0 0 10vw yellow);
+  /* filter: drop-shadow(0 0 10vw yellow); */
   stroke-width: 1; /* Ширина линии */
 }
 
@@ -727,4 +727,20 @@ a:link {
 
 #end-text {
   text-align: center;
+}
+
+@keyframes pulse {
+  0% {
+    stroke-width: 0.2vw;
+  }
+  50% {
+    stroke-width: 1vw;
+  }
+  100% {
+    stroke-width: 0.2vw;
+  }
+}
+
+.point {
+  animation: pulse 1.5s infinite;
 }
