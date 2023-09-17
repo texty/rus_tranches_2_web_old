@@ -1,120 +1,97 @@
 mapboxgl.accessToken =
   "pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNsZGQyY2w5dDBjb2gzcG8xeXQ3c2EzczEifQ.lYkv8Hg7kFKNdNJF7wx4mg";
 
-var map_center = [35.5, 47.1];
-var main_zoom = 9;
-const bounds = [
-  [46, 34], // Southwest coordinates
-  [48, 37], // Northeast coordinates
-];
-
-// "./data/osm_liberty.json",
-
-const map = new mapboxgl.Map({
+const MAP_SETTINGS = {
   container: "map",
   style: "./data/osm_liberty.json",
-  center: map_center,
-  zoom: main_zoom,
+  center: [35.5, 47.1],
+  zoom: 9,
   minZoom: 8,
   maxZoom: 18,
   pitch: 0,
   bearing: 0,
   antialias: true,
-  //   maxBounds: bounds,
-});
+};
 
+const map = new mapboxgl.Map(MAP_SETTINGS);
 map.addControl(new mapboxgl.NavigationControl(), "top-right");
 
 map.scrollZoom.disable();
 map.dragPan.disable();
 
-map.on("style.load", () => {
+map.on("style.load", setupTerrain);
+map.on("load", setupLayers);
+map.on("load", animateLayers);
+map.on("click", logClick);
+
+function setupTerrain() {
   map.addSource("mapbox-dem", {
     type: "raster-dem",
     url: "mapbox://mapbox.mapbox-terrain-dem-v1",
     tileSize: 512,
     maxzoom: 14,
   });
-  // add the DEM source as a terrain layer with exaggerated height
   map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
-});
+}
 
-map.on("load", function () {
-  map.addSource("custom-tiles", {
-    type: "raster",
-    tiles: [
-      "https://raw.githubusercontent.com/texty/rus_tranches_2_web/main/tiles/{z}/{x}/{y}.png",
-    ],
-    tileSize: 256,
-  });
+function addSource(id, type, data) {
+  map.addSource(id, { type, data });
+}
 
-  map.addLayer({
-    id: "custom-layer",
-    type: "raster",
-    source: "custom-tiles",
-  });
+function addLayer(id, type, source, paint) {
+  map.addLayer({ id, type, source, paint });
+}
 
-  //   Додаємо джерела із файлів
-
-  map.addSource("front_line", {
-    type: "geojson",
-    data: "data/front_line.geojson",
-  });
-
-  map.addSource("points", {
-    type: "geojson",
-    data: "data/points.geojson",
-  });
-
-  map.addSource("lines", {
-    type: "geojson",
-    data: "data/lines.geojson",
-  });
-
-  //   Додаємо шари
-
-  map.addLayer({
-    id: "front_line-layer",
-    type: "line",
-    source: "front_line",
-    paint: {
-      "line-color": "#f3a6b2",
-      "line-width": 5,
-    },
-  });
-
-  map.addLayer({
-    id: "points-layer",
-    type: "circle",
-    source: "points",
-    paint: {
-      "circle-radius": 5,
-      "circle-color": "red",
-      "circle-opacity": 0.8,
-      "circle-stroke-color": "darkred",
-      "circle-stroke-width": 2,
-    },
-  });
-
-  map.addLayer({
-    id: "lines-layer",
-    type: "line",
-    source: "lines",
-    paint: {
-      "line-color": "darkred",
-      "line-width": 2,
-      "line-opacity": 1,
-    },
-  });
-
-  //   Додаємо фільтри для шарів
-});
-
-map.on("click", function (event) {
-  console.log(
-    "Вы кликнули на координатах: " + event.lngLat.lat + ", " + event.lngLat.lng
+function setupLayers() {
+  addSource(
+    "custom-tiles",
+    "raster",
+    "https://raw.githubusercontent.com/texty/rus_tranches_2_web/main/tiles/{z}/{x}/{y}.png"
   );
-});
+  addLayer("custom-layer", "raster", "custom-tiles");
+
+  const sources = [
+    { id: "front_line", type: "geojson", data: "data/front_line.geojson" },
+    { id: "points", type: "geojson", data: "data/points.geojson" },
+    { id: "lines", type: "geojson", data: "data/lines.geojson" },
+  ];
+  sources.forEach(({ id, type, data }) => addSource(id, type, data));
+
+  addLayer("front_line-layer", "line", "front_line", {
+    "line-color": "#f3a6b2",
+    "line-width": 5,
+  });
+  addLayer("points-layer", "circle", "points", {
+    "circle-radius": 5,
+    "circle-color": "red",
+    "circle-opacity": 0.8,
+    "circle-stroke-color": "darkred",
+    "circle-stroke-width": 2,
+  });
+  addLayer("lines-layer", "line", "lines", {
+    "line-color": "darkred",
+    "line-width": 2,
+    "line-opacity": 1,
+  });
+
+  map.setFilter("lines-layer", ["==", ["get", "id"], ""]);
+  map.setFilter("points-layer", ["==", ["get", "id"], ""]);
+}
+
+function logClick(event) {
+  console.log(
+    `Вы кликнули на координатах: ${event.lngLat.lat}, ${event.lngLat.lng}`
+  );
+}
+
+// Анимационные функции (animatePoint и animateLine) остаются без изменений.
+
+function animateLayers() {
+  animateLine();
+  animatePoint();
+}
+
+// Оставляем Scrollama код без изменений, так как он уже достаточно чист и аккуратен.
 
 let pulse = true;
 let pulseSize = 5;
@@ -133,7 +110,7 @@ function animatePoint() {
   map.setPaintProperty("points-layer", "circle-radius", pulseSize);
 
   // Запланировать следующую итерацию
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animatePoint);
 }
 
 let pulseDirection = 1; // 1 для увеличения, -1 для уменьшения
@@ -159,12 +136,6 @@ function animateLine() {
   // Запланировать следующую итерацию
   requestAnimationFrame(animateLine);
 }
-
-// Запустите анимационный цикл после загрузки карты
-map.on("load", function () {
-  animateLine();
-  animatePoint();
-});
 
 // instantiate the scrollama
 const scroller = scrollama();
