@@ -8,8 +8,8 @@ scroller
   })
   .onStepEnter((response) => {
     console.log(response.element.attributes.datacoords.value);
-    let coords = response.element.attributes.datacoords.value;
-    let zoom = response.element.attributes.datazoom.value;
+    let coords = response.element.attributes.datacoords.value.split(",");
+    let zoom = parseInt(response.element.attributes.datazoom.value);
     console.log(coords);
     console.log(zoom);
 
@@ -29,9 +29,13 @@ scroller
       }
     });
 
-    map.flyTo(coords.split(","), zoom, { duration: 1.0 }); // 5 секунд для примера
+    // Изменяем способ перелета к точке
+    map.flyTo({
+      center: [parseFloat(coords[1]), parseFloat(coords[0])],
+      zoom: zoom,
+      duration: 1.0,
+    });
   })
-
   .onStepExit((response) => {
     // Убираем объекты, указанные в objects_to_remove
     let objectsToRemove = response.element.attributes.objects_to_remove

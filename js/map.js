@@ -1,160 +1,140 @@
-var map = L.map("map", {
-  scrollWheelZoom: false,
-  zoomControl: false,
-}).setView([47.1, 35.5], 10);
+mapboxgl.accessToken =
+  "pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNsZGQyY2w5dDBjb2gzcG8xeXQ3c2EzczEifQ.lYkv8Hg7kFKNdNJF7wx4mg";
 
-new L.Control.Zoom({ position: "topright" }).addTo(map);
+var map_center = [35.5, 47.1];
+var main_zoom = 13;
+const bounds = [
+  [30.5121, 50.2234], // Southwest coordinates
+  [33.4476, 52.6351], // Northeast coordinates
+];
 
-("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
-("https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}");
-("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png");
+// "./data/osm_liberty.json",
 
-L.tileLayer(
-  "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
-  {
-    maxZoom: 17,
-    minZoom: 10,
-    attribution: "© OpenStreetMap",
-  }
-).addTo(map);
-
-// https://raw.githubusercontent.com/HubashovD/project_mykolaiv_shelling_web/main/tiles/tileset/{z}/{x}/{y}.png
-
-L.tileLayer(
-  //   "https://texty.org.ua/d/2022/mykolaiv_shelling_tiles/tiles_webp/ts/{z}/{x}/{y}.webp",
-  "https://raw.githubusercontent.com/texty/rus_tranches_2_web/main/tiles/{z}/{x}/{y}.png",
-  {
-    maxZoom: 17,
-    minZoom: 10,
-    attribution: "© Planet.com",
-  }
-).addTo(map);
-
-var southWest = L.latLng(46.0, 34.0),
-  northEast = L.latLng(48.0, 37.0);
-var bounds = L.latLngBounds(southWest, northEast);
-
-map.setMaxBounds(bounds);
-map.on("drag", function () {
-  map.panInsideBounds(bounds, { animate: true });
+const map = new mapboxgl.Map({
+  container: "map",
+  style: "data/positron2.json",
+  //style: 'mapbox://styles/mapbox/satellite-streets-v9',
+  center: map_center,
+  zoom: main_zoom,
+  minZoom: 7,
+  maxZoom: 14,
+  pitch: 0,
+  bearing: 0,
+  antialias: true,
+  maxBounds: bounds,
 });
 
-var tranchesStyles = {
-  fillColor: "none",
-  // "stroke-width": 5,
-};
+map.addControl(new mapboxgl.NavigationControl(), "top-right");
 
-var frontLineStyles = {
-  fillColor: "none",
-  color: "#f3a6b2",
-  "stroke-width": 5,
-};
+map.scrollZoom.disable(); // отключает зум с помощью колеса мыши
+map.dragPan.disable(); // отключает перемещение с помощью перетаскивания
 
-var pointsStyles = {
-  fillColor: "none",
-};
+map.on("style.load", () => {
+  map.addSource("mapbox-dem", {
+    type: "raster-dem",
+    url: "mapbox://mapbox.mapbox-terrain-dem-v1",
+    tileSize: 512,
+    maxzoom: 14,
+  });
+  // add the DEM source as a terrain layer with exaggerated height
+  map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
+});
 
-fetch("data/front_line.geojson")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    geoData = L.geoJSON(data, {
-      style: frontLineStyles,
-    });
-    geoData.setStyle({ className: "frontline" });
-    geoData.addTo(map);
+map.on("load", function () {
+
+  map.addSource("custom-tiles", {
+    type: "raster",
+    tiles: [
+      "https://raw.githubusercontent.com/texty/rus_tranches_2_web/main/tiles/{z}/{x}/{y}.png",
+    ],
+    tileSize: 256,
   });
 
-fetch("data/tranches.geojson")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    geoData = L.geoJSON(data, {
-      style: tranchesStyles,
-    });
-    geoData.setStyle({ className: "tranches" });
-    geoData.addTo(map);
+  map.addLayer({
+    id: "custom-layer",
+    type: "raster",
+    source: "custom-tiles",
   });
 
-fetch("data/points.geojson")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    geoData = L.geoJSON(data, {
-      pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, {
-          radius: 5, // Размер маркера
-          fillColor: "red",
-          color: "darkred",
-          weight: 2,
-          opacity: 1,
-          fillOpacity: 0.8,
-          className: feature.properties.class + " point",
-        });
-      },
+  // Добавление GeoJSON слоев
+  fetch("data/front_line.geojson")
+    .then((response) => response.json())
+    .then((data) => {
+      map.addSource("front_line", {
+        type: "geojson",
+        data: data,
+      });
+      map.addLayer({
+        id: "front_line-layer",
+        type: "line",
+        source: "front_line",
+        paint: {
+          "line-color": "#f3a6b2",
+          "line-width": 5,
+        },
+      });
     });
-    geoData.addTo(map);
-  });
 
-fetch("data/lines.geojson")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    geoData = L.geoJSON(data, {
-      style: function (feature) {
-        return {
-          color: "darkred", // Цвет линии
-          weight: 2, // Толщина линии
-          opacity: 1, // Прозрачность линии
-          className: feature.properties.class + " line", // Добавляем класс из свойств объекта и дополнительный класс "line"
-        };
-      },
+  fetch("data/tranches.geojson")
+    .then((response) => response.json())
+    .then((data) => {
+      map.addSource("tranches", {
+        type: "geojson",
+        data: data,
+      });
+      map.addLayer({
+        id: "tranches-layer",
+        type: "line",
+        source: "tranches",
+        paint: {
+          "line-color": "transparent",
+        },
+      });
     });
-    geoData.addTo(map);
-  });
+
+  fetch("data/points.geojson")
+    .then((response) => response.json())
+    .then((data) => {
+      map.addSource("points", {
+        type: "geojson",
+        data: data,
+      });
+      map.addLayer({
+        id: "points-layer",
+        type: "circle",
+        source: "points",
+        paint: {
+          "circle-radius": 5,
+          "circle-color": "red",
+          "circle-opacity": 0.8,
+          "circle-stroke-color": "darkred",
+          "circle-stroke-width": 2,
+        },
+      });
+    });
+
+  fetch("data/lines.geojson")
+    .then((response) => response.json())
+    .then((data) => {
+      map.addSource("lines", {
+        type: "geojson",
+        data: data,
+      });
+      map.addLayer({
+        id: "lines-layer",
+        type: "line",
+        source: "lines",
+        paint: {
+          "line-color": "darkred",
+          "line-width": 2,
+          "line-opacity": 1,
+        },
+      });
+    });
+});
 
 map.on("click", function (event) {
-  var lat = event.latlng.lat;
-  var lng = event.latlng.lng;
-  console.log("Вы кликнули на координатах: " + lat + ", " + lng);
+  console.log(
+    "Вы кликнули на координатах: " + event.lngLat.lat + ", " + event.lngLat.lng
+  );
 });
-
-// fetch("data/tranches_routes.geojson")
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     geoData = L.geoJSON(data, {
-//       style: tranchesStyles,
-//     });
-//     geoData.setStyle({ className: "tranches_routes" });
-//     geoData.addTo(map);
-//   });
-
-// fetch("data/tank_lines.geojson")
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     geoData = L.geoJSON(data, {
-//       style: tranchesStyles,
-//     });
-//     geoData.setStyle({ className: "tank_lines" });
-//     geoData.addTo(map);
-//   });
-
-// fetch("data/pyramids.geojson")
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     geoData = L.geoJSON(data, {
-//       style: tranchesStyles,
-//     });
-//     geoData.setStyle({ className: "pyramids" });
-//     geoData.addTo(map);
-//   });
