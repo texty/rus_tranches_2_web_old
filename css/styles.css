@@ -728,38 +728,3 @@ a:link {
 #end-text {
   text-align: center;
 }
-
-@keyframes pulse {
-  0% {
-    radius: 1vw;
-    stroke-width: 0.2vw;
-  }
-  50% {
-    radius: 2vw;
-    stroke-width: 1vw;
-  }
-  100% {
-    radius: 1vw;
-    stroke-width: 0.2vw;
-  }
-}
-
-.point {
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes linepulse {
-  0% {
-    stroke-width: 0.2vw;
-  }
-  50% {
-    stroke-width: 1vw;
-  }
-  100% {
-    stroke-width: 0.2vw;
-  }
-}
-
-.line {
-  animation: linepulse 1.5s infinite;
-}

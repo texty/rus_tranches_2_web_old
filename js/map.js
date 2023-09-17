@@ -119,7 +119,7 @@ map.on("click", function (event) {
 let pulse = true;
 let pulseSize = 5;
 
-function animate() {
+function animatePoint() {
   // Обновите размер и прозрачность точки в зависимости от текущего значения pulse
   if (pulse) {
     pulseSize += 0.1;
@@ -136,9 +136,34 @@ function animate() {
   requestAnimationFrame(animate);
 }
 
+let pulseDirection = 1; // 1 для увеличения, -1 для уменьшения
+let minLineWidth = 2;
+let maxLineWidth = 5;
+
+function animateLine() {
+  // Текущая ширина линии
+  let currentLineWidth = map.getPaintProperty("lines-layer", "line-width");
+
+  // Изменение ширины линии
+  if (pulseDirection === 1) {
+    currentLineWidth += 0.1;
+    if (currentLineWidth > maxLineWidth) pulseDirection = -1;
+  } else {
+    currentLineWidth -= 0.1;
+    if (currentLineWidth < minLineWidth) pulseDirection = 1;
+  }
+
+  // Примените обновленную ширину к слою
+  map.setPaintProperty("lines-layer", "line-width", currentLineWidth);
+
+  // Запланировать следующую итерацию
+  requestAnimationFrame(animateLine);
+}
+
 // Запустите анимационный цикл после загрузки карты
 map.on("load", function () {
-  animate();
+  animateLine();
+  animatePoint();
 });
 
 // instantiate the scrollama
