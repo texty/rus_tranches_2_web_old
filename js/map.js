@@ -24,14 +24,38 @@ map.on("load", setupLayers);
 map.on("load", animateLayers);
 map.on("click", logClick);
 
+// function setupTerrain() {
+//   map.addSource("mapbox-dem", {
+//     type: "raster-dem",
+//     url: "mapbox://mapbox.mapbox-terrain-dem-v1",
+//     tileSize: 512,
+//     maxzoom: 18,
+//   });
+//   map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
+// }
+
+// addSource(
+//   "custom-tiles",
+//   "raster",
+//   "https://raw.githubusercontent.com/texty/rus_tranches_2_web/main/tiles/{z}/{x}/{y}.png"
+// );
+// addLayer("custom-layer", "raster", "custom-tiles");
+
 function setupTerrain() {
-  map.addSource("mapbox-dem", {
-    type: "raster-dem",
-    url: "mapbox://mapbox.mapbox-terrain-dem-v1",
-    tileSize: 512,
-    maxzoom: 14,
+  map.addSource("custom-tiles", {
+    type: "raster", // Используем тип "raster" для растровых тайлов
+    tiles: [
+      "https://raw.githubusercontent.com/texty/rus_tranches_2_web/main/tiles/{z}/{x}/{y}.png",
+    ],
+    tileSize: 256,
+    maxzoom: 18,
   });
-  map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
+
+  map.addLayer({
+    id: "custom-tiles-layer",
+    type: "raster",
+    source: "custom-tiles",
+  });
 }
 
 function addSource(id, type, sourceData) {
@@ -57,13 +81,6 @@ function addLayer(id, type, source, paint = {}) {
 }
 
 function setupLayers() {
-  addSource(
-    "custom-tiles",
-    "raster",
-    "https://raw.githubusercontent.com/texty/rus_tranches_2_web/main/tiles/{z}/{x}/{y}.png"
-  );
-  addLayer("custom-layer", "raster", "custom-tiles");
-
   const sources = [
     { id: "front_line", type: "geojson", data: "data/front_line.geojson" },
     { id: "points", type: "geojson", data: "data/points.geojson" },
