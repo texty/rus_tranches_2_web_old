@@ -168,20 +168,44 @@ function animateLine() {
   requestAnimationFrame(animateLine);
 }
 
-function createMatchFilter(valueList) {
-  // Если список пуст, возвращаем фильтр, который всегда возвращает false
-  if (!valueList || valueList.length === 0) {
+// function createMatchFilter(valueList) {
+//   // Если список пуст, возвращаем фильтр, который всегда возвращает false
+//   if (!valueList || valueList.length === 0) {
+//     return ["==", ["get", "id"], "nonexistent_value"];
+//   }
+
+//   // В противном случае создаем фильтр "match"
+//   const matchFilter = ["match", ["get", "id"]];
+//   valueList.forEach((value) => {
+//     matchFilter.push(value, true);
+//   });
+//   matchFilter.push(false); // Это наш fallback output
+
+//   return matchFilter;
+// }
+
+// function createMatchFilter(valueList) {
+//   // Если список пуст, возвращаем фильтр, который всегда возвращает false
+//   if (!valueList || valueList.length === 0) {
+//     return ["==", ["get", "id"], "nonexistent_value"];
+//   }
+
+//   // В противном случае создаем фильтр "in"
+//   const inFilter = ["in", ["get", "id"], ...valueList];
+
+//   return inFilter;
+// }
+
+function createFilter(idList) {
+  if (!idList || idList.length === 0) {
+    // Вернуть фильтр, который не отображает ни одного объекта
     return ["==", ["get", "id"], "nonexistent_value"];
   }
 
-  // В противном случае создаем фильтр "match"
-  const matchFilter = ["match", ["get", "id"]];
-  valueList.forEach((value) => {
-    matchFilter.push(value, true);
-  });
-  matchFilter.push(false); // Это наш fallback output
+  // Убираем дубликаты из списка (если есть)
+  const uniqueIds = [...new Set(idList)];
 
-  return matchFilter;
+  return ["in", ["get", "id"], ...uniqueIds];
 }
 
 // instantiate the scrollama
@@ -215,9 +239,11 @@ scroller
 
     console.log(points);
 
-    map.setFilter("lines-layer", createMatchFilter(lines));
-    map.setFilter("points-layer", createMatchFilter(points));
+    // map.setFilter("lines-layer", createMatchFilter(lines));
+    // map.setFilter("points-layer", createMatchFilter(points));
 
+    map.setFilter("lines-layer", createFilter(lines));
+    map.setFilter("points-layer", createFilter(points));
     // Изменяем способ перелета к точке
     map.flyTo({
       center: [parseFloat(coords[1]), parseFloat(coords[0])],
@@ -242,6 +268,9 @@ scroller
 
     console.log(lines);
 
-    map.setFilter("lines-layer", createMatchFilter(lines));
-    map.setFilter("points-layer", createMatchFilter(points));
+    // map.setFilter("lines-layer", createMatchFilter(lines));
+    // map.setFilter("points-layer", createMatchFilter(points));
+
+    map.setFilter("lines-layer", createFilter(lines));
+    map.setFilter("points-layer", createFilter(points));
   });
