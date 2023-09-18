@@ -79,7 +79,7 @@ function setupLayers() {
 
   addLayer("points-layer", "circle", "points", {
     "circle-radius": 5,
-    "circle-color": "red",
+    "circle-color": "darkred",
     "circle-opacity": 0.8,
     "circle-stroke-color": "darkred",
     "circle-stroke-width": 2,
@@ -94,7 +94,7 @@ function setupLayers() {
   addLayer("polygons-layer", "fill", "polygons", {
     "fill-color": "darkred",
     "fill-opacity": 0.6,
-    "fill-outline-color": "black",
+    "fill-outline-color": "darkred",
   });
 
   map.setFilter("lines-layer", ["==", ["get", "id"], ""]);
@@ -168,37 +168,38 @@ function animateLine() {
   requestAnimationFrame(animateLine);
 }
 
+let pulseDirectionP = 1;
 let minFillOpacity = 0.4;
 let maxFillOpacity = 0.8;
 
-// function animatePolygon() {
-//   // Текущая прозрачность заливки
-//   let currentFillOpacity = map.getPaintProperty(
-//     "polygons-layer",
-//     "fill-opacity"
-//   );
+function animatePolygon() {
+  // Текущая прозрачность заливки
+  let currentFillOpacity = map.getPaintProperty(
+    "polygons-layer",
+    "fill-opacity"
+  );
 
-//   // Изменение прозрачности заливки
-//   if (pulseDirection === 1) {
-//     currentFillOpacity += 0.05;
-//     if (currentFillOpacity >= maxFillOpacity) {
-//       currentFillOpacity = maxFillOpacity; // Здесь установите в максимальное значение
-//       pulseDirection = -1;
-//     }
-//   } else {
-//     currentFillOpacity -= 0.05;
-//     if (currentFillOpacity <= minFillOpacity) {
-//       currentFillOpacity = minFillOpacity; // Здесь установите в минимальное значение
-//       pulseDirection = 1;
-//     }
-//   }
+  // Изменение прозрачности заливки
+  if (pulseDirectionP === 1) {
+    currentFillOpacity += 0.05;
+    if (currentFillOpacity >= maxFillOpacity) {
+      currentFillOpacity = maxFillOpacity; // Здесь установите в максимальное значение
+      pulseDirectionP = -1;
+    }
+  } else {
+    currentFillOpacity -= 0.05;
+    if (currentFillOpacity <= minFillOpacity) {
+      currentFillOpacity = minFillOpacity; // Здесь установите в минимальное значение
+      pulseDirectionP = 1;
+    }
+  }
 
-//   // Примените обновленную прозрачность к слою
-//   map.setPaintProperty("polygons-layer", "fill-opacity", currentFillOpacity);
+  // Примените обновленную прозрачность к слою
+  map.setPaintProperty("polygons-layer", "fill-opacity", currentFillOpacity);
 
-//   // Запланировать следующую итерацию
-//   requestAnimationFrame(animatePolygon);
-// }
+  // Запланировать следующую итерацию
+  requestAnimationFrame(animatePolygon);
+}
 
 // function createMatchFilter(valueList) {
 //   // Если список пуст, возвращаем фильтр, который всегда возвращает false
