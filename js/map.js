@@ -85,6 +85,7 @@ function setupLayers() {
     { id: "front_line", type: "geojson", data: "data/front_line.geojson" },
     { id: "points", type: "geojson", data: "data/points.geojson" },
     { id: "lines", type: "geojson", data: "data/lines.geojson" },
+    { id: "poly", type: "geojson", data: "data/poly.geojson" },
   ];
   sources.forEach(({ id, type, data }) => addSource(id, type, data));
 
@@ -202,10 +203,16 @@ function createFilter(idList) {
     return ["==", ["get", "id"], "nonexistent_value"];
   }
 
-  // Убираем дубликаты из списка (если есть)
-  const uniqueIds = [...new Set(idList)];
+  const matchFilter = ["match", ["get", "id"]];
 
-  return ["in", ["get", "id"], ...uniqueIds];
+  idList.forEach((id) => {
+    matchFilter.push(id);
+    matchFilter.push(true);
+  });
+
+  matchFilter.push(false); // Это наш fallback output
+
+  return matchFilter;
 }
 
 // instantiate the scrollama
