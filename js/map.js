@@ -24,23 +24,6 @@ map.on("load", setupLayers);
 map.on("load", animateLayers);
 map.on("click", logClick);
 
-// function setupTerrain() {
-//   map.addSource("mapbox-dem", {
-//     type: "raster-dem",
-//     url: "mapbox://mapbox.mapbox-terrain-dem-v1",
-//     tileSize: 512,
-//     maxzoom: 18,
-//   });
-//   map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
-// }
-
-// addSource(
-//   "custom-tiles",
-//   "raster",
-//   "https://raw.githubusercontent.com/texty/rus_tranches_2_web/main/tiles/{z}/{x}/{y}.png"
-// );
-// addLayer("custom-layer", "raster", "custom-tiles");
-
 function setupTerrain() {
   map.addSource("custom-tiles", {
     type: "raster", // Используем тип "raster" для растровых тайлов
@@ -85,7 +68,7 @@ function setupLayers() {
     { id: "front_line", type: "geojson", data: "data/front_line.geojson" },
     { id: "points", type: "geojson", data: "data/points.geojson" },
     { id: "lines", type: "geojson", data: "data/lines.geojson" },
-    { id: "poly", type: "geojson", data: "data/poly.geojson" },
+    { id: "polygons", type: "geojson", data: "data/poly.geojson" },
   ];
   sources.forEach(({ id, type, data }) => addSource(id, type, data));
 
@@ -93,6 +76,7 @@ function setupLayers() {
     "line-color": "#f3a6b2",
     "line-width": 5,
   });
+
   addLayer("points-layer", "circle", "points", {
     "circle-radius": 5,
     "circle-color": "red",
@@ -100,14 +84,22 @@ function setupLayers() {
     "circle-stroke-color": "darkred",
     "circle-stroke-width": 2,
   });
+
   addLayer("lines-layer", "line", "lines", {
     "line-color": "darkred",
     "line-width": 2,
     "line-opacity": 1,
   });
 
+  addLayer("polygons-layer", "fill", "polygons", {
+    "fill-color": "darkred",
+    "fill-opacity": 0.6,
+    "fill-outline-color": "black",
+  });
+
   map.setFilter("lines-layer", ["==", ["get", "id"], ""]);
   map.setFilter("points-layer", ["==", ["get", "id"], ""]);
+  map.setFilter("polygons-layer", ["==", ["get", "id"], ""]);
 }
 
 function logClick(event) {
@@ -121,6 +113,7 @@ function logClick(event) {
 function animateLayers() {
   animateLine();
   animatePoint();
+  animatePolygon();
 }
 
 // Оставляем Scrollama код без изменений, так как он уже достаточно чист и аккуратен.
@@ -156,10 +149,16 @@ function animateLine() {
   // Изменение ширины линии
   if (pulseDirection === 1) {
     currentLineWidth += 0.1;
-    if (currentLineWidth > maxLineWidth) pulseDirection = -1;
+    if (currentLineWidth > maxLineWidth) {
+      currentLineWidth = maxLineWidth; // Устанавливаем в максимальное значение
+      pulseDirection = -1;
+    }
   } else {
     currentLineWidth -= 0.1;
-    if (currentLineWidth < minLineWidth) pulseDirection = 1;
+    if (currentLineWidth < minLineWidth) {
+      currentLineWidth = minLineWidth; // Устанавливаем в минимальное значение
+      pulseDirection = 1;
+    }
   }
 
   // Примените обновленную ширину к слою
@@ -168,6 +167,38 @@ function animateLine() {
   // Запланировать следующую итерацию
   requestAnimationFrame(animateLine);
 }
+
+let minFillOpacity = 0.4;
+let maxFillOpacity = 0.8;
+
+// function animatePolygon() {
+//   // Текущая прозрачность заливки
+//   let currentFillOpacity = map.getPaintProperty(
+//     "polygons-layer",
+//     "fill-opacity"
+//   );
+
+//   // Изменение прозрачности заливки
+//   if (pulseDirection === 1) {
+//     currentFillOpacity += 0.05;
+//     if (currentFillOpacity >= maxFillOpacity) {
+//       currentFillOpacity = maxFillOpacity; // Здесь установите в максимальное значение
+//       pulseDirection = -1;
+//     }
+//   } else {
+//     currentFillOpacity -= 0.05;
+//     if (currentFillOpacity <= minFillOpacity) {
+//       currentFillOpacity = minFillOpacity; // Здесь установите в минимальное значение
+//       pulseDirection = 1;
+//     }
+//   }
+
+//   // Примените обновленную прозрачность к слою
+//   map.setPaintProperty("polygons-layer", "fill-opacity", currentFillOpacity);
+
+//   // Запланировать следующую итерацию
+//   requestAnimationFrame(animatePolygon);
+// }
 
 // function createMatchFilter(valueList) {
 //   // Если список пуст, возвращаем фильтр, который всегда возвращает false
@@ -251,6 +282,7 @@ scroller
 
     map.setFilter("lines-layer", createFilter(lines));
     map.setFilter("points-layer", createFilter(points));
+    map.setFilter("polygons-layer", createFilter(polygons));
     // Изменяем способ перелета к точке
     map.flyTo({
       center: [parseFloat(coords[1]), parseFloat(coords[0])],
@@ -280,4 +312,5 @@ scroller
 
     map.setFilter("lines-layer", createFilter(lines));
     map.setFilter("points-layer", createFilter(points));
+    map.setFilter("polygons-layer", createFilter(polygons));
   });
